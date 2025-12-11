@@ -11,29 +11,12 @@ public class Gilded {
     private long lastQueryTime = -1L;
     private @Nullable List<Supporter> gildedSupporters = null;
 
-    public boolean canQuery() {
-        return System.currentTimeMillis() - lastQueryTime > 60000; // 1 min
-    }
-
     public @NotNull List<Supporter> getOrQuery() {
-        if (gildedSupporters != null) return gildedSupporters;
-        if (!canQuery()) return Collections.emptyList();
-        return query();
+         return Collections.emptyList();
     }
 
     public @NotNull List<Supporter> query() {
         lastQueryTime = System.currentTimeMillis();
-        try {
-            Supporters.Loader loader = new Supporters.Loader();
-
-            new Thread(() -> {
-                String json = loader.readFileFromURL(getUuidsUri());
-                if (json == null) return;
-                gildedSupporters = loader.parseSupporters(json);
-            }).start();
-        } catch (Exception e) {
-            Exposure.LOGGER.warn("Cannot get list of supporters.", e);
-        }
 
         if (gildedSupporters == null) {
             return Collections.emptyList();

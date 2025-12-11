@@ -63,8 +63,9 @@ public record CameraAddFrameC2SP(InteractionHand hand, CompoundTag frame, List<U
         ServerPlayer serverPlayer = ((ServerPlayer) player);
 
         Camera.getCamera(player).ifPresentOrElse(camera -> {
+            ItemStack cameraStack = camera.get().getStack();
             CameraItem cameraItem = camera.get().getItem();
-            cameraItem.addFrame(serverPlayer, camera.get().getStack(), frame, getEntities(serverPlayer.serverLevel()));
+            cameraItem.addFrame(serverPlayer, cameraStack, frame, getEntities(serverPlayer.serverLevel()));
         }, () -> Exposure.LOGGER.error("Cannot add frame. Player is not using a Camera."));
 
         ItemStack cameraStack = player.getItemInHand(hand);

@@ -17,8 +17,8 @@ import java.util.Objects;
 
 public final class FocalRange implements StringRepresentable {
     
-    public static final int ALLOWED_MIN = 10;
-    public static final int ALLOWED_MAX = 300;
+    public static final int ALLOWED_MIN = 0;
+    public static final int ALLOWED_MAX = 1000;
 
     private final int min;
     private final int max;

@@ -20,7 +20,7 @@ public class EntitiesInFrame {
         Vec3 cameraPos = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
 
         List<Entity> entities = player.level().getEntities(player, new AABB(player.blockPosition()).inflate(128),
-                entity -> entity instanceof LivingEntity);
+                entity -> entity instanceof Entity);
 
         entities.sort((entity, entity2) -> {
             float dist1 = player.distanceTo(entity);

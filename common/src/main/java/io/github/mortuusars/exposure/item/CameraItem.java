@@ -329,7 +329,7 @@ public class CameraItem extends Item {
 
         if (player.level().getGameTime() - closedAtTimestamp < 60) { // Skip effects if shutter "was closed" long ago
             player.gameEvent(GameEvent.ITEM_INTERACT_FINISH);
-            player.getCooldowns().addCooldown(this, flashHasFired ? 10 : 2);
+            player.getCooldowns().addCooldown(this, flashHasFired ? 20 : 5);
             playCameraSound(player, player, Exposure.SoundEvents.SHUTTER_CLOSE.get(), 0.7f, 1.1f, 0.2f);
 
             getFilm(stack).ifPresent(f -> {
@@ -542,7 +542,7 @@ public class CameraItem extends Item {
         if (projectingFile) {
             entitiesInFrame = Collections.emptyList();
         } else {
-            entitiesInFrame = EntitiesInFrame.get(player, Viewfinder.getCurrentFov(), 12, isInSelfieMode(cameraStack))
+            entitiesInFrame = EntitiesInFrame.get(player, Viewfinder.getCurrentFov(), 32, isInSelfieMode(cameraStack))
                     .stream()
                     .map(Entity::getUUID)
                     .toList();
@@ -555,7 +555,10 @@ public class CameraItem extends Item {
 
     protected void startCapture(Player player, ItemStack cameraStack, String exposureId, boolean flashHasFired) {
         Capture capture;
-
+        ItemAndStack<FilmRollItem> film = getFilm(cameraStack).orElseThrow();
+        if (film.getStack().is(Exposure.Items.DREAM_FILM.get())) {
+            return;
+        }
         Optional<ItemAndStack<InterplanarProjectorItem>> projector = getAttachment(cameraStack, FILTER_ATTACHMENT)
                 .map(filter -> filter.getItem() instanceof InterplanarProjectorItem ? new ItemAndStack<>(filter) : null);
 
@@ -659,6 +662,12 @@ public class CameraItem extends Item {
         PlatformHelper.fireModifyFrameDataEvent(player, cameraStack, frameTag, entities);
 
         player.awardStat(Exposure.Stats.FILM_FRAMES_EXPOSED);
+
+        ItemAndStack<FilmRollItem> film = getFilm(cameraStack).orElseThrow();
+        if (film.getStack().is(Exposure.Items.DREAM_FILM.get())) {
+            return;
+        }
+
         Exposure.Advancements.FILM_FRAME_EXPOSED.trigger(player, new ItemAndStack<>(cameraStack), frameTag, entities);
 
         addFrameToFilm(cameraStack, frameTag);

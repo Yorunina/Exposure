@@ -120,6 +120,7 @@
   "item.exposure.album": "相册",
   "item.exposure.album.tooltip.photos_count": "§7照片数：%s",
   "item.exposure.black_and_white_film": "黑白胶卷",
+  "item.exposure.dream_film": "梦幻胶卷",
   "item.exposure.camera": "相机",
   "item.exposure.camera.camera_attachments.fail.shutter_open": "快门打开时无法拆卸相机",
   "item.exposure.camera.sneak_to_open_tooltip": "潜行时打开进行配置",
@@ -184,5 +185,6 @@
   "subtitle.exposure.photograph_frame.place": "相框：被放置",
   "subtitle.exposure.photograph_frame.remove_item": "相框：清空",
   "subtitle.exposure.photograph_frame.rotate_item": "相框：点击",
-  "tooltip.exposure.hold_for_details": "§8按[§7Shift§8]显示详细信息"
+  "tooltip.exposure.hold_for_details": "§8按[§7Shift§8]显示详细信息",
+  "gui.exposure.camera_attachments.change_skin": "Change Skin"
 }

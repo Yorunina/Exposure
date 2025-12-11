@@ -41,19 +41,7 @@ public class Supporters {
 
     public static class Loader {
         public @Nullable String readFileFromURL(URI uri) {
-            try {
-                URL url = uri.toURL();
-                URLConnection connection = url.openConnection();
-                connection.setConnectTimeout(10000); // 10 seconds
-                @Nullable String encoding = connection.getContentEncoding();
-                Charset charset = (encoding == null) ? StandardCharsets.UTF_8 : Charset.forName(encoding);
 
-                try (Reader reader = new BufferedReader(new InputStreamReader(url.openStream(), charset))) {
-                    return CharStreams.toString(reader);
-                }
-            } catch (Exception e) {
-                Exposure.LOGGER.warn("Cannot read file from '{}': {}", uri, e.getMessage());
-            }
             return null;
         }
 

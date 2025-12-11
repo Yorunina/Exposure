@@ -124,6 +124,7 @@ public class FilmRollItem extends Item implements IFilmItem {
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        if (!player.isShiftKeyDown()) return InteractionResultHolder.pass(player.getItemInHand(usedHand));
         if (!Config.Common.FILM_ROLL_RENAMING.get() || !(player instanceof ServerPlayer serverPlayer)) {
             return super.use(level, player, usedHand);
         }

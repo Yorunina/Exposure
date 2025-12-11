@@ -121,6 +121,7 @@
   "item.exposure.album": "Photo Album",
   "item.exposure.album.tooltip.photos_count": "§7Photos: %s",
   "item.exposure.black_and_white_film": "Black and White Film",
+  "item.exposure.dream_film": "Dream Film",
   "item.exposure.camera": "Camera",
   "item.exposure.camera.camera_attachments.fail.shutter_open": "Cannot disassemble the camera while shutter is open.",
   "item.exposure.camera.sneak_to_open_tooltip": "Use while sneaking to configure",

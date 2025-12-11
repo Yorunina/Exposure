@@ -16,38 +16,11 @@ public class Patreon {
     }
 
     public @NotNull Map<Tier, List<Supporter>> getOrQuery() {
-        if (patrons != null) return patrons;
-        if (!canQuery()) return Collections.emptyMap();
-        return query();
+        return Collections.emptyMap();
     }
 
     public @NotNull Map<Tier, List<Supporter>> query() {
         lastQueryTime = System.currentTimeMillis();
-        try {
-            Supporters.Loader loader = new Supporters.Loader();
-
-            if (patrons != null) {
-                patrons.clear();
-            }
-
-            new Thread(() -> {
-                for (Tier patreonTier : Tier.values()) {
-                    String json = loader.readFileFromURL(patreonTier.getUuidsUri());
-                    if (json == null) return;
-
-                    List<Supporter> parsedSupporters = loader.parseSupporters(json);
-
-                    if (patrons == null) {
-                        patrons = new HashMap<>();
-                    }
-
-                    patrons.put(patreonTier, parsedSupporters);
-                }
-            }).start();
-        } catch (Exception e) {
-            Exposure.LOGGER.warn("Cannot get list of supporters.", e);
-        }
-
         if (patrons == null) {
             return Collections.emptyMap();
         }

@@ -58,6 +58,16 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven {
+        url "https://maven.latvian.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+        }
+    }
+    maven {
+        name "createmod maven"
+        url "https://maven.createmod.net/"
+    }
 }
 
 dependencies {
@@ -79,7 +89,7 @@ dependencies {
     modRuntimeOnly("curse.maven:jade-324717:${jade_forge_id}") { transitive = false }
 
     modCompileOnly("com.simibubi.create:create-${create_forge_version}") { transitive = false }
-    modCompileOnly("com.jozufozu.flywheel:flywheel-forge-${flywheel_forge_version}")
+    modCompileOnly("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:1.0.0-215")
     modCompileOnly("com.tterrag.registrate:Registrate:${registrate_forge_version}")
 
 //    modRuntimeOnly("curse.maven:real-camera-851574:5328994")

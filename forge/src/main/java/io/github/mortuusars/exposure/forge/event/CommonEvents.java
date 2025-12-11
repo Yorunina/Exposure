@@ -33,6 +33,7 @@ public class CommonEvents {
                 event.accept(Exposure.Items.CAMERA.get());
                 event.accept(Exposure.Items.BLACK_AND_WHITE_FILM.get());
                 event.accept(Exposure.Items.COLOR_FILM.get());
+                event.accept(Exposure.Items.DREAM_FILM.get());
                 event.accept(Exposure.Items.DEVELOPED_BLACK_AND_WHITE_FILM.get());
                 event.accept(Exposure.Items.DEVELOPED_COLOR_FILM.get());
                 event.accept(Exposure.Items.PHOTOGRAPH.get());
