@@ -527,11 +527,15 @@ public class CameraStandEntity extends Entity implements CameraHolder {
     }
 
     protected void travel() {
+        if (isNoGravity()) {
+            return;
+        }
+
         this.xo = this.getX();
         this.yo = this.getY();
         this.zo = this.getZ();
 
-        //this.applyGravity();
+        applyGravity();
 
         if (this.isInWater() && this.getFluidHeight(FluidTags.WATER) > 0.1F) {
             this.setUnderwaterMovement();
@@ -563,6 +567,17 @@ public class CameraStandEntity extends Entity implements CameraHolder {
                 }
             }
         }
+    }
+
+    protected void applyGravity() {
+        double d = this.getGravity();
+        if (d != 0.0) {
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0, -d, 0.0));
+        }
+    }
+
+    protected double getGravity() {
+        return this.isInWater() ? 0.005 : 0.04;
     }
 
     protected void setUnderwaterMovement() {

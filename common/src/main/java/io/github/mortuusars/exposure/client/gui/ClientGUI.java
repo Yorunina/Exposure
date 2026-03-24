@@ -56,30 +56,24 @@ public class ClientGUI {
     private static void addRecipeTooltip(ItemStack stack, Level tooltipContext,
                                          @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag isAdvanced,
                                          Predicate<CraftingRecipe> recipeFilter, String detailsKey) {
-        if (Minecraft.getInstance().level == null) {
+        Optional<NonNullList<Ingredient>> recipeIngredients = Minecrft.level()
+              .getRecipeManager()
+              .getAllRecipesFor(RecipeType.CRAFTING)
+              .stream()
+              .filter(recipeFilter)
+              .findFirst()
+              .map(Recipe::getIngredients);
+
+        if (recipeIngredients.isEmpty() || recipeIngredients.get().isEmpty()) {
             return;
         }
 
-        tooltipComponents.add(Component.translatable("tooltip.exposure.hold_for_details"));
         if (!Screen.hasShiftDown()) {
+            tooltipComponents.add(Component.translatable("tooltip.exposure.hold_for_details"));
             return;
         }
-
-        Optional<NonNullList<Ingredient>> recipeIngredients = Minecraft.getInstance().level
-                .getRecipeManager()
-                .getAllRecipesFor(RecipeType.CRAFTING)
-                .stream()
-                //.map(RecipeHolder::value)
-                .filter(recipeFilter)
-                .findFirst()
-                .map(Recipe::getIngredients);
-
-        if (recipeIngredients.isEmpty() || recipeIngredients.get().isEmpty())
-            return;
 
         NonNullList<Ingredient> ingredients = recipeIngredients.get();
-
-        tooltipComponents.add(Component.empty());
 
         Style orange = Style.EMPTY.withColor(0xc7954b);
         Style yellow = Style.EMPTY.withColor(0xeeda78);
@@ -94,7 +88,7 @@ public class ClientGUI {
             else if (stacks.length == 1)
                 tooltipComponents.add(Component.literal("  ").append(stacks[0].getHoverName().copy().withStyle(yellow)));
             else { // Cycle stacks if it's not one:
-                int val = (int) Math.ceil((Minecraft.getInstance().level.getGameTime() + 10 * i) % (20f * stacks.length) / 20f);
+                int val = (int) Math.ceil((Minecrft.level().getGameTime() + 10 * i) % (20f * stacks.length) / 20f);
                 int index = Mth.clamp(val - 1, 0, stacks.length - 1);
 
                 tooltipComponents.add(Component.literal("  ").append(stacks[index].getHoverName().copy().withStyle(yellow)));

@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.9.19 - 2026-03-18
+- Fixed spyglass lens being incorrectly defined, which prevented other custom lenses from working properly.
+
+## 1.9.18 - 2026-03-04
+- Removed Photograph tooltip that explains copying recipe (when JEI is not installed) for the time being, because it was not working as expected.
+- Fixed log spam when trying to retrieve photograph id in some cases.
+- Added log message when custom film color palette is not found.
+
+## 1.9.17 - 2026-02-27
+- Fixed **Camera Stand** not being affected by gravity.
+- [Forge] Removed dependency on the specific **Create** version.
+
 ## 1.9.16 - 2026-02-23
 - Fixed sending large resolution images from server to client not working. 
 

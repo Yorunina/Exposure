@@ -2,7 +2,6 @@ package io.github.mortuusars.exposure.world.item;
 
 import io.github.mortuusars.exposure.Config;
 import io.github.mortuusars.exposure.Exposure;
-import io.github.mortuusars.exposure.PlatformHelper;
 import io.github.mortuusars.exposure.world.level.storage.ExposureIdentifier;
 import io.github.mortuusars.exposure.client.gui.ClientGUI;
 import io.github.mortuusars.exposure.world.photograph.PhotographType;
@@ -49,14 +48,15 @@ public class PhotographItem extends Item {
     @Override
     public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
         ExposureIdentifier identifier = getIdentifier(stack);
-        return !identifier.isEmpty() ? Optional.of(new PhotographTooltip(List.of(new ItemAndStack<>(stack)))) : Optional.empty();
+        return !identifier.isEmpty()
+              ? Optional.of(new PhotographTooltip(List.of(new ItemAndStack<>(stack))))
+              : Optional.empty();
     }
 
     @Override
     public void appendHoverText(ItemStack stack, Level context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         @Nullable Integer generation = Exposure.DataComponents.getPhotographGeneration(stack);
-        if (generation != null) {
-            if (generation > 0)
+        if (generation != null && generation > 0) {
                 tooltipComponents.add(Component.translatable("item.exposure.photograph.generation." + generation)
                         .withStyle(ChatFormatting.GRAY));
         }
@@ -73,12 +73,13 @@ public class PhotographItem extends Item {
                     .withStyle(ChatFormatting.GRAY));
         }
 
-        if (Config.Client.RECIPE_TOOLTIPS_WITHOUT_JEI.get()) {
-            boolean jeiLoaded = PlatformHelper.isModLoaded("jei");
-            if ((generation == null || generation < 2) && !jeiLoaded) {
-                ClientGUI.addPhotographCopyingTooltip(stack, context, tooltipComponents, tooltipFlag);
-            }
-        }
+        /* Removed because of difficulties to show the correct copying recipe
+           (it was always choosing color copying, as it's a base recipe (fallback))
+        if ((generation == null || generation < 2)
+              && Config.Client.RECIPE_TOOLTIPS_WITHOUT_JEI.get()
+            *//*&& !PlatformHelper.isModLoaded("jei")*//*) {
+            ClientGUI.addPhotographCopyingTooltip(stack, context, tooltipComponents, tooltipFlag);
+        }*/
 
         if (tooltipFlag.isAdvanced()) {
             String identifier = frame.identifier().map(

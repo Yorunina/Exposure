@@ -672,8 +672,13 @@ public class Exposure {
                 return ExposureIdentifier.EMPTY;
             }
 
-            return ExposureIdentifier.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("photograph_frame").get("identifier"))
-                  .resultOrPartial(LOGGER::error)
+            @Nullable Tag identifierTag = tag.getCompound("photograph_frame").get("identifier");
+            if (identifierTag == null) {
+                return ExposureIdentifier.EMPTY;
+            }
+
+            return ExposureIdentifier.CODEC.parse(NbtOps.INSTANCE, identifierTag)
+                  .resultOrPartial(e -> LOGGER.error("Cannot decode ExposureIdentifier from tag '{}': {}", identifierTag, e))
                   .orElse(ExposureIdentifier.EMPTY);
         }
 

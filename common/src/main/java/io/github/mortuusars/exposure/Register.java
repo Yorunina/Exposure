@@ -87,16 +87,6 @@ public class Register {
         throw new AssertionError();
     }
 
-    /*@ExpectPlatform
-    public static <T extends ItemSubPredicate.NbtType<?>> Supplier<T> itemSubPredicate(String name, Supplier<T> supplier) {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static <T extends EntitySubPredicate> Supplier<MapCodec<T>> entitySubPredicate(String name, Supplier<MapCodec<T>> supplier) {
-        throw new AssertionError();
-    }*/
-
     @ExpectPlatform
     public static <A extends ArgumentType<?>, T extends ArgumentTypeInfo.Template<A>, I extends ArgumentTypeInfo<A, T>>
     Supplier<ArgumentTypeInfo<A, T>> commandArgumentType(String id, Class<A> infoClass, I argumentTypeInfo) {
@@ -107,11 +97,6 @@ public class Register {
     public static <T extends FeatureConfiguration> Supplier<Feature<?>> worldGenFeature(String name, Supplier<Feature<T>> featureSupplier) {
         throw new AssertionError();
     }
-
-    /*@ExpectPlatform
-    public static <T> DataComponentType<T> dataComponentType(String name, Consumer<DataComponentType.Builder<T>> builderConsumer) {
-        throw new AssertionError();
-    }*/
 
     @ExpectPlatform
     public static <T extends ParticleType<? extends ParticleOptions>> Supplier<T> particleType(String name, Supplier<T> supplier) {

@@ -21,27 +21,6 @@ import java.util.List;
  */
 @Mixin(FillingBySpout.class)
 public class FillingBySpoutMixin {
-    /**
-     * Transfers components from input stack to results, but only if input and result are both {@link FilmItem}.
-     */
-//    @ModifyVariable(method = "fillItem", at = @At(value = "INVOKE_ASSIGN",
-//            target = "Lcom/simibubi/create/content/fluids/transfer/FillingRecipe;rollResults()Ljava/util/List;"), index = 7,remap = false)
-//    private static List<ItemStack> onFillItem(List<ItemStack> results, Level world, int requiredAmount, ItemStack stack, FluidStack availableFluid) {
-//        if (!(stack.getItem() instanceof FilmItem) || stack.getTag() == null) {
-//            return results;
-//        }
-//
-//        results = new ArrayList<>(results);
-//        for (ItemStack result : results) {
-//            if (result.getItem() instanceof FilmItem) {
-//                result.getOrCreateTag().merge(stack.getTag());
-//                break;
-//            }
-//        }
-//
-//        return results;
-//    }
-
     @WrapOperation(method = "fillItem", at = @At(value = "INVOKE",
           target = "Lcom/simibubi/create/content/fluids/transfer/FillingRecipe;rollResults()Ljava/util/List;"), remap = false)
     private static List<ItemStack> onFillItem(FillingRecipe instance, Operation<List<ItemStack>> original,
