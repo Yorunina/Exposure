@@ -20,10 +20,10 @@ public class FrameAddedEvent extends Event {
     private final ItemStack camera;
     private final Frame frame;
     private final List<BlockPos> positionsInFrame;
-    private final List<LivingEntity> entitiesInFrame;
+    private final List<Entity> entitiesInFrame;
 
     public FrameAddedEvent(CameraHolder cameraHolder, ItemStack camera, Frame frame,
-                           List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame) {
+                           List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame) {
 
         this.cameraHolder = cameraHolder;
         this.camera = camera;
@@ -52,7 +52,7 @@ public class FrameAddedEvent extends Event {
         return positionsInFrame;
     }
 
-    public List<LivingEntity> getEntitiesInFrame() {
+    public List<Entity> getEntitiesInFrame() {
         return entitiesInFrame;
     }
 }

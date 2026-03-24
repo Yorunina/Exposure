@@ -12,7 +12,7 @@ public class Patreon {
     private @Nullable Map<Tier, List<Supporter>> patrons = null;
 
     public boolean canQuery() {
-        return System.currentTimeMillis() - lastQueryTime > 60000; // 1 min
+        return false; // 1 min
     }
 
     public @NotNull Map<Tier, List<Supporter>> getOrQuery() {

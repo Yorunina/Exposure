@@ -776,7 +776,7 @@ public class CameraItem extends Item {
         double fov = getViewfinderFov(level, stack);
 
         List<BlockPos> positionsInFrame = !projecting ? getPositionsInFrame(holder, pov, fov) : Collections.emptyList();
-        List<LivingEntity> entitiesInFrame = !projecting ? EntitiesInFrame.get(holder, pov, fov) : Collections.emptyList();
+        List<Entity> entitiesInFrame = !projecting ? EntitiesInFrame.get(holder, pov, fov) : Collections.emptyList();
 
         Frame frame = createFrame(holder, level, stack, captureParameters, positionsInFrame, entitiesInFrame);
         addFrameToFilm(stack, frame);
@@ -784,7 +784,7 @@ public class CameraItem extends Item {
     }
 
     public Frame createFrame(CameraHolder holder, ServerLevel level, ItemStack stack, CaptureParameters captureParameters,
-                             List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame) {
+                             List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame) {
         return Frame.create()
                 .setIdentifier(ExposureIdentifier.id(captureParameters.exposureId()))
                 .setType(captureParameters.filmProperties().type())
@@ -802,7 +802,7 @@ public class CameraItem extends Item {
     }
 
     protected void addFrameExtraData(CameraHolder holder, ServerLevel level, ItemStack camera, CaptureParameters params,
-                                     List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame, CompoundTag data) {
+                                     List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame, CompoundTag data) {
         Entity cameraHolder = holder.asHolderEntity();
         boolean projecting = params.projection().isPresent();
 
@@ -915,7 +915,7 @@ public class CameraItem extends Item {
     }
 
     public void onFrameAdded(CameraHolder holder, ServerLevel level, ItemStack stack, Frame frame,
-                             List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame) {
+                             List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame) {
         Entity executor = holder.getPlayerExecutingExposure().map(pl -> (Entity) pl).orElse(holder.asHolderEntity());
         ExposureServer.frameHistory().add(executor, frame);
 
@@ -933,7 +933,7 @@ public class CameraItem extends Item {
         PlatformHelper.postFrameAddedEvent(holder, stack, frame, positionsInFrame, entitiesInFrame);
     }
 
-    protected void entityCaptured(CameraHolder cameraHolder, ItemStack stack, LivingEntity entity) {
+    protected void entityCaptured(CameraHolder cameraHolder, ItemStack stack, Entity entity) {
         if (cameraHolder.asHolderEntity() instanceof ServerPlayer player && entity instanceof EnderMan enderMan) {
             boolean lookingAtAngryEnderMan = player.equals(enderMan.getTarget()) && enderMan.isLookingAtMe(player);
 
@@ -1004,9 +1004,11 @@ public class CameraItem extends Item {
         PointOfView pov = getPointOfView(holder, stack);
 
         double fov = getViewfinderFov(level, stack);
-        List<LivingEntity> entities = EntitiesInFrame.get(holder.asHolderEntity(), pov, fov);
-        for (LivingEntity livingEntity : entities) {
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 2, 1, true, false, false));
+        List<Entity> entities = EntitiesInFrame.get(holder.asHolderEntity(), pov, fov);
+        for (Entity entity : entities) {
+            if (entity instanceof LivingEntity livingEntity) {
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 2, 1, true, false, false));
+            }
         }
     }
 

@@ -15,6 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -82,17 +83,17 @@ public class PlatformHelperImpl {
 
     // --
 
-    public static void postModifyEntityInFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack camera, LivingEntity entityInFrame, CompoundTag data) {
+    public static void postModifyEntityInFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack camera, Entity entityInFrame, CompoundTag data) {
         MinecraftForge.EVENT_BUS.post(new ModifyEntityInFrameDataEvent(cameraHolder, camera, entityInFrame, data));
     }
 
     public static void postModifyFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack camera, CaptureParameters captureParameters,
-                                                     List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame, CompoundTag data) {
+                                                     List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame, CompoundTag data) {
         MinecraftForge.EVENT_BUS.post(new ModifyFrameExtraDataEvent(cameraHolder, camera, captureParameters, positionsInFrame, entitiesInFrame, data));
     }
 
     public static void postFrameAddedEvent(CameraHolder holder, ItemStack camera, Frame frame,
-                                           List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame) {
+                                           List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame) {
         MinecraftForge.EVENT_BUS.post(new FrameAddedEvent(holder, camera, frame, positionsInFrame, entitiesInFrame));
     }
 }

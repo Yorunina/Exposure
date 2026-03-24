@@ -3,6 +3,7 @@ package io.github.mortuusars.exposure.forge.integration.kubejs.event;
 import io.github.mortuusars.exposure.forge.api.event.ModifyEntityInFrameDataEvent;
 import io.github.mortuusars.exposure.util.ExtraData;
 import io.github.mortuusars.exposure.world.entity.CameraHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -10,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
  * Can be used to add custom entity in frame NBT data that is stored in a frame.
  */
 public class ModifyEntityInFrameExtraDataEventJS extends ModifyEntityInFrameDataEvent /*implements KubeEntityEvent*/ {
-    public ModifyEntityInFrameExtraDataEventJS(CameraHolder cameraHolder, ItemStack camera, LivingEntity entityInFrame, ExtraData data) {
+    public ModifyEntityInFrameExtraDataEventJS(CameraHolder cameraHolder, ItemStack camera, Entity entityInFrame, ExtraData data) {
         super(cameraHolder, camera, entityInFrame, data);
     }
 

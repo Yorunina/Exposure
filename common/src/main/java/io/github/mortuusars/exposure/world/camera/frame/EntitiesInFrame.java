@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntitiesInFrame {
-    public static List<LivingEntity> get(CameraHolder cameraHolder, PointOfView pov, double fov) {
+    public static List<Entity> get(CameraHolder cameraHolder, PointOfView pov, double fov) {
         return get(cameraHolder.asHolderEntity(), pov, fov);
     }
 
-    public static List<LivingEntity> get(Entity cameraHolder, PointOfView pov, double fov) {
+    public static List<Entity> get(Entity cameraHolder, PointOfView pov, double fov) {
         fov *= 0.95; // 5% margin from edge
         double focalLength = Fov.fovToFocalLength(fov);
 
@@ -34,16 +34,14 @@ public class EntitiesInFrame {
             return dist1 > dist2 ? 1 : -1;
         });
 
-        List<LivingEntity> entitiesInFrame = new ArrayList<>();
+        List<Entity> entitiesInFrame = new ArrayList<>();
 
         for (Entity entity : entities) {
-            if (!(entity instanceof LivingEntity livingEntity)) continue;
-            if (!livingEntity.isAlive()) continue;
             if (!frustum.contains(entity.getEyePosition())) continue; // Not in frame
             if (calculateVisibleDistance(pov.pos(), entity) > focalLength) continue; // Too far to be in frame
             if (!hasLineOfSight(pov.pos(), entity)) continue; // Not visible
 
-            entitiesInFrame.add(livingEntity);
+            entitiesInFrame.add(entity);
         }
 
         return entitiesInFrame;

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -24,5 +25,5 @@ public interface ModifyFrameExtraDataCallback {
             });
 
     void modifyFrameExtraData(CameraHolder cameraHolder, ItemStack stack, CaptureParameters captureParameters,
-                              List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame, CompoundTag data);
+                              List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame, CompoundTag data);
 }

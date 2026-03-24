@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class FrameAddedEventJS extends FrameAddedEvent /*implements KubeEntityEvent*/ {
     public FrameAddedEventJS(CameraHolder cameraHolder, ItemStack camera, Frame frame,
-                             List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame) {
+                             List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame) {
         super(cameraHolder, camera, frame, positionsInFrame, entitiesInFrame);
     }
 

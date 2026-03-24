@@ -16,8 +16,8 @@ public class Lenses {
         return registryAccess.registryOrThrow(Exposure.Registries.LENS)
                 .stream()
                 .filter(lens -> lens.predicate().matches(stack))
-                .map(Lens::focalRange)
-                .findFirst();
+                .findAny()
+                .map(Lens::focalRange);
     }
 
     public static FocalRange getFocalRangeOrDefault(RegistryAccess registryAccess, ItemStack stack) {

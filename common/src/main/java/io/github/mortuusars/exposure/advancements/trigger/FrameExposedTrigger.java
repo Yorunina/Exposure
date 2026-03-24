@@ -39,7 +39,7 @@ public class FrameExposedTrigger extends SimpleCriterionTrigger<FrameExposedTrig
                         ItemStack cameraStack,
                         Frame frame,
                         List<BlockPos> locationsInFrame,
-                        List<LivingEntity> entitiesInFrame) {
+                        List<Entity> entitiesInFrame) {
         this.trigger(player, triggerInstance ->
                 triggerInstance.matches(player, cameraHolder, cameraStack, frame, locationsInFrame, entitiesInFrame));
     }
@@ -90,7 +90,7 @@ public class FrameExposedTrigger extends SimpleCriterionTrigger<FrameExposedTrig
                                    ItemStack cameraStack,
                                    Frame frame,
                                    List<BlockPos> locationsInFrame,
-                                   List<LivingEntity> entitiesInFrame) {
+                                   List<Entity> entitiesInFrame) {
                 return (camera.matches(player.serverLevel(), cameraStack, cameraHolder.asHolderEntity().position()))
                         && (this.frame.matches(frame))
                         && locationsMatch(player, locationsInFrame)
@@ -102,7 +102,7 @@ public class FrameExposedTrigger extends SimpleCriterionTrigger<FrameExposedTrig
                         locationInFrame.matches(player.serverLevel(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5));
             }
 
-            private boolean entitiesInFrameMatch(ServerPlayer player, CameraHolder cameraHolder, List<LivingEntity> entitiesInFrame) {
+            private boolean entitiesInFrameMatch(ServerPlayer player, CameraHolder cameraHolder, List<Entity> entitiesInFrame) {
                 return this.entitiesInFrame.isEmpty() || this.entitiesInFrame.stream().allMatch(predicate ->
                         entitiesInFrame.stream().anyMatch(entity -> {
                             LootContext context = createContextForHolder(player.serverLevel(), cameraHolder, entity);

@@ -12,7 +12,7 @@ public class Gilded {
     private @Nullable List<Supporter> gildedSupporters = null;
 
     public boolean canQuery() {
-        return System.currentTimeMillis() - lastQueryTime > 60000; // 1 min
+        return false; // 1 min
     }
 
     public @NotNull List<Supporter> getOrQuery() {

@@ -4,18 +4,14 @@ import com.google.common.base.Preconditions;
 import io.github.mortuusars.exposure.Config;
 import io.github.mortuusars.exposure.Exposure;
 import io.github.mortuusars.exposure.PlatformHelper;
-import io.github.mortuusars.exposure.data.ColorPalette;
-import io.github.mortuusars.exposure.data.ColorPalettes;
 import io.github.mortuusars.exposure.world.camera.ExposureType;
 import io.github.mortuusars.exposure.client.gui.ClientGUI;
-import io.github.mortuusars.exposure.world.camera.film.properties.FilmProperties;
 import io.github.mortuusars.exposure.world.camera.film.properties.FilmStyle;
 import io.github.mortuusars.exposure.world.camera.frame.Frame;
 import io.github.mortuusars.exposure.world.inventory.ItemRenameMenu;
 import io.github.mortuusars.exposure.world.item.interfaces.DefaultFilmStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -105,6 +101,7 @@ public class FilmRollItem extends Item implements SensitiveFilmItem, DefaultFilm
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+        if (!player.isShiftKeyDown()) return InteractionResultHolder.pass(player.getItemInHand(usedHand));
         if (!Config.Server.FILM_ROLL_EASY_RENAMING.get() || !(player instanceof ServerPlayer serverPlayer)) {
             return super.use(level, player, usedHand);
         }

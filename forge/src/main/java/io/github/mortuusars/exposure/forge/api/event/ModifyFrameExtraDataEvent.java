@@ -20,11 +20,11 @@ public class ModifyFrameExtraDataEvent extends Event {
     private final ItemStack stack;
     private final CaptureParameters captureParameters;
     private final List<BlockPos> positionsInFrame;
-    private final List<LivingEntity> entitiesInFrame;
+    private final List<Entity> entitiesInFrame;
     private final CompoundTag data;
 
     public ModifyFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack stack, CaptureParameters captureParameters,
-                                     List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame, CompoundTag data) {
+                                     List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame, CompoundTag data) {
         this.cameraHolder = cameraHolder;
         this.stack = stack;
         this.captureParameters = captureParameters;
@@ -53,7 +53,7 @@ public class ModifyFrameExtraDataEvent extends Event {
         return positionsInFrame;
     }
 
-    public List<LivingEntity> getEntitiesInFrame() {
+    public List<Entity> getEntitiesInFrame() {
         return entitiesInFrame;
     }
 

@@ -19,6 +19,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -108,12 +109,12 @@ public class PlatformHelperImpl {
     }
 
     public static void postModifyFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack camera, CaptureParameters captureParameters,
-                                                List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame, CompoundTag data) {
+                                                List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame, CompoundTag data) {
         ModifyFrameExtraDataCallback.EVENT.invoker().modifyFrameExtraData(cameraHolder, camera, captureParameters, positionsInFrame, entitiesInFrame, data);
     }
 
     public static void postFrameAddedEvent(CameraHolder cameraHolder, ItemStack camera, Frame frame,
-                                           List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame) {
+                                           List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame) {
         FrameAddedCallback.EVENT.invoker().frameAdded(cameraHolder, camera, frame, positionsInFrame, entitiesInFrame);
     }
 }

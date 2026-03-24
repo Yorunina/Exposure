@@ -12,6 +12,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -70,19 +71,19 @@ public class PlatformHelper {
     // --
 
     @ExpectPlatform
-    public static void postModifyEntityInFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack camera, LivingEntity entityInFrame, CompoundTag data) {
+    public static void postModifyEntityInFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack camera, Entity entityInFrame, CompoundTag data) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
     public static void postModifyFrameExtraDataEvent(CameraHolder cameraHolder, ItemStack camera, CaptureParameters captureParameters,
-                                                     List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame, CompoundTag data) {
+                                                     List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame, CompoundTag data) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
     public static void postFrameAddedEvent(CameraHolder holder, ItemStack camera, Frame frame,
-                                           List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame) {
+                                           List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame) {
         throw new AssertionError();
     }
 

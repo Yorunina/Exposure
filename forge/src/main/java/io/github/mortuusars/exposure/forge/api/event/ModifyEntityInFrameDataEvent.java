@@ -14,12 +14,12 @@ import net.minecraftforge.eventbus.api.Event;
 public class ModifyEntityInFrameDataEvent extends Event {
     private final CameraHolder cameraHolder;
     private final ItemStack camera;
-    private final LivingEntity entityInFrame;
+    private final Entity entityInFrame;
     private final CompoundTag data;
 
     public ModifyEntityInFrameDataEvent(CameraHolder cameraHolder,
                                         ItemStack camera,
-                                        LivingEntity entityInFrame,
+                                        Entity entityInFrame,
                                         CompoundTag data) {
         this.cameraHolder = cameraHolder;
         this.camera = camera;
@@ -39,7 +39,7 @@ public class ModifyEntityInFrameDataEvent extends Event {
         return camera;
     }
 
-    public LivingEntity getEntityInFrame() {
+    public Entity getEntityInFrame() {
         return entityInFrame;
     }
 

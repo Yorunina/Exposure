@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ModifyFrameExtraDataEventJS extends ModifyFrameExtraDataEvent /*implements KubeEntityEvent */{
     public ModifyFrameExtraDataEventJS(CameraHolder cameraHolder, ItemStack stack, CaptureParameters captureParameters,
-                                       List<BlockPos> positionsInFrame, List<LivingEntity> entitiesInFrame, ExtraData data) {
+                                       List<BlockPos> positionsInFrame, List<Entity> entitiesInFrame, ExtraData data) {
         super(cameraHolder, stack, captureParameters, positionsInFrame, entitiesInFrame, data);
     }
 
