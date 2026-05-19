@@ -36,8 +36,7 @@ public class PathCaptureTask extends Task<Result<Image>> {
         if (hasHttpPrefix(path)) {
             try {
                 URI uri = new URI(path);
-                URL url = uri.toURL();
-                return new UrlCaptureTask(url).execute();
+                return new UrlCaptureTask(uri).execute();
             } catch (Exception e) {
                 LOGGER.error("Path '{}' has http/s prefix, but is not valid. Error: {}", path, e.getMessage());
                 return CompletableFuture.completedFuture(Result.error(ERROR_PATH_INVALID));

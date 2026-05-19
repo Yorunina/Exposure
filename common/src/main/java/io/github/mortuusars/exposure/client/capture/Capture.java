@@ -14,6 +14,7 @@ import io.github.mortuusars.exposure.client.capture.action.CaptureAction;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.net.URI;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -114,8 +115,8 @@ public class Capture<T> extends Task<Result<T>> {
         return new FileCaptureTask(file);
     }
 
-    public static Task<Result<Image>> fromUrl(URL url) {
-        return new UrlCaptureTask(url);
+    public static Task<Result<Image>> fromUrl(URI uri) {
+        return new UrlCaptureTask(uri);
     }
 
     public static Task<Result<Image>> path(String path) {

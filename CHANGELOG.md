@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.20 - 2026-03-25
+- Images loaded with Interplanar Projector are now limited to maximum of 10000x10000. 
+- While playing on the multiplayer server - projecting images from URL will only work for allowed domains by default (configurable). This is a client-only setting, so players can change it at any time.
+- Added a config option to allow projecting images from file only relatively to game directory (while on multiplayer server).
+
 ## 1.9.19 - 2026-03-18
 - Fixed spyglass lens being incorrectly defined, which prevented other custom lenses from working properly.
 

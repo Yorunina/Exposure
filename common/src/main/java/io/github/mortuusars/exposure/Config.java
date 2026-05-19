@@ -1,5 +1,6 @@
 package io.github.mortuusars.exposure;
 
+import io.github.mortuusars.exposure.client.capture.task.UrlLoading;
 import io.github.mortuusars.exposure.util.color.Color;
 import io.github.mortuusars.exposure.world.block.FlashBlock;
 import io.github.mortuusars.exposure.world.camera.component.FocalRange;
@@ -300,6 +301,10 @@ public class Config {
         public static final ForgeConfigSpec.ConfigValue<List<? extends String>> FORCE_DIRECT_CAPTURE_MODS;
         public static final ForgeConfigSpec.IntValue DIRECT_CAPTURE_DELAY_FRAMES;
         public static final ForgeConfigSpec.BooleanValue BACKGROUND_CAPTURE_USE_PANORAMIC_MODE;
+        public static final ForgeConfigSpec.BooleanValue FILE_LOADING_ONLY_RELATIVE_TO_EXPOSURES_DIR;
+        public static final ForgeConfigSpec.EnumValue<UrlLoading> URL_LOADING;
+        public static final ForgeConfigSpec.ConfigValue<List<? extends String>> URL_LOADING_ALLOWED_DOMAINS;
+        public static final ForgeConfigSpec.ConfigValue<List<? extends String>> URL_LOADING_ALLOWED_SUBDOMAINS;
 
         // RENDER
         public static final ForgeConfigSpec.BooleanValue PIXEL_PERFECT_PHOTOGRAPH_FRAME;
@@ -440,6 +445,43 @@ public class Config {
                             "If captured images are still not looking properly - enable 'force_direct_capture'.",
                             "Default: false")
                       .define("background_capture_use_panoramic_mode", false);
+
+                {
+                    builder.push("loading");
+
+                    FILE_LOADING_ONLY_RELATIVE_TO_EXPOSURES_DIR = builder
+                          .comment("Loading from file will only accept a path relative to game directory, when on the dedicated server (multiplayer).",
+                                "This option is for protection against malicious actions using Projector or load commands.",
+                                "Default: false")
+                          .define("multiplayer_file_loading_only_from_game_dir", false);
+
+                    URL_LOADING = builder
+                          .comment("How loading from URL should behave when on the dedicated server (multiplayer).",
+                                "This option is for protection against malicious actions using Projector or load commands.",
+                                "Default: ONLY_ALLOWED_DOMAINS")
+                          .defineEnum("multiplayer_url_loading", UrlLoading.ONLY_ALLOWED_DOMAINS);
+
+                    URL_LOADING_ALLOWED_DOMAINS = builder
+                          .comment("List of allowed domains for loading from URl, if 'multiplayer_url_loading' is set to ONLY_ALLOWED_DOMAINS.")
+                          .defineListAllowEmpty(
+                                List.of("multiplayer_url_loading_allowed_domains"),
+                                () -> List.of("i.imgur.com",
+                                      "cdn.discordapp.com",
+                                      "media.discordapp.net",
+                                      "raw.githubusercontent.com"),
+                                o -> true);
+
+                    URL_LOADING_ALLOWED_SUBDOMAINS = builder
+                          .comment("List of allowed domains for loading from URl, if 'multiplayer_url_loading' is set to ONLY_ALLOWED_DOMAINS.")
+                          .defineListAllowEmpty(
+                                List.of("multiplayer_url_loading_allowed_subdomains"),
+                                () -> List.of(".imgur.com",
+                                      ".discordapp.com"),
+                                o -> true);
+
+                    builder.pop();
+                }
+
                 builder.pop();
             }
 
